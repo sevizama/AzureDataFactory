@@ -1,0 +1,9 @@
+{
+	"name": "adfcursojesus",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a686bc99-c684-45c7-a95b-87cd92418662",
+		"tenantId": "8eafa0d9-40f0-4189-bc83-171b55d361a6"
+	}
+}
