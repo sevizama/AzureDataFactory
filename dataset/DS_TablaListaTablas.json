@@ -1,0 +1,26 @@
+{
+	"name": "DS_TablaListaTablas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SqlServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NombreTabla",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TablaMetadatos"
+		}
+	}
+}

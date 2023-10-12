@@ -5,6 +5,14 @@
 			"referenceName": "LS_SqlServer1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"schmaName": {
+				"type": "string"
+			},
+			"tableName": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [
@@ -68,7 +76,10 @@
 		],
 		"typeProperties": {
 			"schema": "Sales",
-			"table": "SalesOrderDetail"
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
 		}
 	}
 }

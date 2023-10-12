@@ -5,6 +5,11 @@
 			"referenceName": "LS_AzureSqlDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"outputdb": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -68,7 +73,10 @@
 		],
 		"typeProperties": {
 			"schema": "Sales",
-			"table": "SalesOrderDetail"
+			"table": {
+				"value": "@dataset().outputdb",
+				"type": "Expression"
+			}
 		}
 	}
 }
