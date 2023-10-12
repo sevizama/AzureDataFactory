@@ -55,7 +55,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SqlServerTable",
+									"referenceName": "DS_SqlServerTable",
 									"type": "DatasetReference",
 									"parameters": {
 										"schmaName": "Sales",
