@@ -71,10 +71,11 @@
 									"referenceName": "DS_AzureSqlTable",
 									"type": "DatasetReference",
 									"parameters": {
-										"outputdb": {
+										"tableName": {
 											"value": "@item()",
 											"type": "Expression"
-										}
+										},
+										"schmaName": "Sales"
 									}
 								}
 							]
