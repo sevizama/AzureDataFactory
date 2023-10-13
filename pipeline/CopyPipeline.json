@@ -98,7 +98,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM [dbo].[TablaMetadatos]\n",
+						"sqlReaderQuery": "SELECT [TABLE_NAME] FROM [dbo].[TablaMetadatos]\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
