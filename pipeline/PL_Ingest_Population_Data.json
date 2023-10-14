@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy Population Data",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -49,9 +49,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "indic_de,geo\\time",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 1
 								}
 							},
 							{
@@ -61,9 +61,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2008 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 2
 								}
 							},
 							{
@@ -73,9 +73,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2009 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 3
 								}
 							},
 							{
@@ -85,9 +85,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2010 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 4
 								}
 							},
 							{
@@ -97,9 +97,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2011 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 5
 								}
 							},
 							{
@@ -109,9 +109,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2012 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 6
 								}
 							},
 							{
@@ -121,9 +121,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2013 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 7
 								}
 							},
 							{
@@ -133,9 +133,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2014 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 8
 								}
 							},
 							{
@@ -145,9 +145,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2015 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 9
 								}
 							},
 							{
@@ -157,9 +157,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2016 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 10
 								}
 							},
 							{
@@ -169,9 +169,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2017 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 11
 								}
 							},
 							{
@@ -181,9 +181,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2018 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 12
 								}
 							},
 							{
@@ -193,9 +193,9 @@
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "2019 ",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 13
 								}
 							}
 						],
