@@ -1,12 +1,24 @@
 {
 	"name": "LS_http_covid",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"sourceBaseURL": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://github.com/",
+			"url": "@{linkedService().sourceBaseURL}",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous"
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"sevizama": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
 		}
 	}
 }
