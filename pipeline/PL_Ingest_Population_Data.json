@@ -3,9 +3,31 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Population Data",
-				"type": "Copy",
+				"name": "Check file metadata",
+				"type": "Validation",
 				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Source_GZ",
+						"type": "DatasetReference"
+					},
+					"timeout": "0.00:00:30",
+					"sleep": 10,
+					"minimumSize": 1024
+				}
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Check file metadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -15,209 +37,313 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "PreserveHierarchy"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "indic_de,geo\\time",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 1
-								}
-							},
-							{
-								"source": {
-									"name": "2008 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 2
-								}
-							},
-							{
-								"source": {
-									"name": "2009 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 3
-								}
-							},
-							{
-								"source": {
-									"name": "2010 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 4
-								}
-							},
-							{
-								"source": {
-									"name": "2011 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 5
-								}
-							},
-							{
-								"source": {
-									"name": "2012 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 6
-								}
-							},
-							{
-								"source": {
-									"name": "2013 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 7
-								}
-							},
-							{
-								"source": {
-									"name": "2014 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 8
-								}
-							},
-							{
-								"source": {
-									"name": "2015 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 9
-								}
-							},
-							{
-								"source": {
-									"name": "2016 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 10
-								}
-							},
-							{
-								"source": {
-									"name": "2017 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 11
-								}
-							},
-							{
-								"source": {
-									"name": "2018 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 12
-								}
-							},
-							{
-								"source": {
-									"name": "2019 ",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"type": "String",
-									"physicalType": "String",
-									"ordinal": 13
-								}
-							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
+					"dataset": {
 						"referenceName": "DS_Source_GZ",
 						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"columnCount",
+						"size",
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "If Column Count Matches",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "DS_Raw_DataLake",
-						"type": "DatasetReference"
-					}
-				]
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Get Metadata1').output.columnCount, 13)\r\n",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Send Email",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://file_incompatible",
+								"method": "POST",
+								"body": "Error with the file"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Copy Population Data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings",
+										"copyBehavior": "PreserveHierarchy"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "indic_de,geo\\time",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 1
+											}
+										},
+										{
+											"source": {
+												"name": "2008 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 2
+											}
+										},
+										{
+											"source": {
+												"name": "2009 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 3
+											}
+										},
+										{
+											"source": {
+												"name": "2010 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 4
+											}
+										},
+										{
+											"source": {
+												"name": "2011 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 5
+											}
+										},
+										{
+											"source": {
+												"name": "2012 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 6
+											}
+										},
+										{
+											"source": {
+												"name": "2013 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 7
+											}
+										},
+										{
+											"source": {
+												"name": "2014 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 8
+											}
+										},
+										{
+											"source": {
+												"name": "2015 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 9
+											}
+										},
+										{
+											"source": {
+												"name": "2016 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 10
+											}
+										},
+										{
+											"source": {
+												"name": "2017 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 11
+											}
+										},
+										{
+											"source": {
+												"name": "2018 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 12
+											}
+										},
+										{
+											"source": {
+												"name": "2019 ",
+												"type": "String",
+												"physicalType": "String"
+											},
+											"sink": {
+												"type": "String",
+												"physicalType": "String",
+												"ordinal": 13
+											}
+										}
+									],
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_Source_GZ",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DS_Raw_DataLake",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Delete Source File",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Copy Population Data",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS_Source_GZ",
+									"type": "DatasetReference"
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
+				}
 			}
 		],
 		"annotations": []
