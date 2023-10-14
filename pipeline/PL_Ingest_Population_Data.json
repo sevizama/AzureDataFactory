@@ -1,5 +1,5 @@
 {
-	"name": "PL_Copy_from_blob_to_DL",
+	"name": "PL_Ingest_Population_Data",
 	"properties": {
 		"activities": [
 			{
