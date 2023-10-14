@@ -1,0 +1,25 @@
+{
+	"name": "Event_trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_Ingest_Population_Data",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/population/blobs/pop",
+			"blobPathEndsWith": ".gz",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/ca349a1d-1e3c-4355-949b-10de7a4088e2/resourceGroups/CursoADF/providers/Microsoft.Storage/storageAccounts/covidcursojesus",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
