@@ -1,0 +1,9 @@
+{
+	"name": "adfcovidprojectjesuss",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "eec1d3b3-c754-4d3c-b511-c5c057ad790a",
+		"tenantId": "8eafa0d9-40f0-4189-bc83-171b55d361a6"
+	}
+}
